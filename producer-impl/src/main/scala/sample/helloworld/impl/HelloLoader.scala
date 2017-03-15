@@ -3,6 +3,7 @@ package sample.helloworld.impl
 /**
   * Created by knoldus on 16/2/17.
   */
+
 import com.lightbend.lagom.scaladsl.api.ServiceLocator
 import com.lightbend.lagom.scaladsl.api.ServiceLocator.NoServiceLocator
 import com.lightbend.lagom.scaladsl.broker.kafka.LagomKafkaComponents
@@ -25,14 +26,13 @@ class HelloLoader extends LagomApplicationLoader {
 }
 
 abstract class HelloApplication(context: LagomApplicationContext) extends HelloComponents(context)
-    with LagomKafkaComponents
-    {
+  with LagomKafkaComponents {
 
 }
 
 abstract class HelloComponents(context: LagomApplicationContext) extends LagomApplication(context)
   with CassandraPersistenceComponents
-with AhcWSComponents{
+  with AhcWSComponents {
 
 
   // Bind the services that this server provides

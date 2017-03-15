@@ -9,7 +9,7 @@ import sample.helloworld.api.HelloService
 
 import scala.concurrent.ExecutionContext
 
-abstract class AbstractController @Inject()(messagesApi: MessagesApi ,helloService: HelloService)(implicit ec: ExecutionContext) extends Controller {
+abstract class AbstractController @Inject()(messagesApi: MessagesApi, helloService: HelloService)(implicit ec: ExecutionContext) extends Controller {
 
 }
 

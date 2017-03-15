@@ -1,6 +1,5 @@
 @(helloUserForm:Form[HelloUserForm])(implicit messages:Messages)
 @main("Index") {
-    <h1>@Messages("hello")</h1>
 <div class="modal-body">
     @foundationForm(helloUserForm, routes.HelloController.sayHello()) {
     @helper.inputText(helloUserForm("name"),  'placeholder -> "NAME",'id -> "id" )

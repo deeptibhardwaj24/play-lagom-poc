@@ -3,37 +3,54 @@ package controllers
 import play.api.data.Form
 import play.api.data.Forms._
 import play.api.i18n.MessagesApi
-import play.api.mvc.{Action, Controller}
+import play.api.mvc.{Action, AnyContent, Controller}
 import sample.helloworld.api.HelloService
+import sample.helloworld.api.model.GreetingMessage
 
 import scala.concurrent.{ExecutionContext, Future}
 
-/**
-  * Created by deepti on 9/3/17.
-  */
 class HelloController(val messagesApi: MessagesApi, helloService: HelloService)(implicit ec: ExecutionContext) extends Controller {
 
-  val helloUserForm1 = Form(mapping(
+  val helloUserForm = Form(mapping(
     "name" -> nonEmptyText
   )(HelloUserForm.apply)(HelloUserForm.unapply))
 
-  def sayHello()= Action.async{ implicit request =>
-    helloUserForm1.bindFromRequest.fold(
-      badForm => Future {BadRequest(" ")},
+  val helloForm = Form(mapping(
+    "name" -> nonEmptyText,
+    "message" -> nonEmptyText
+  )(HelloForm.apply)(HelloForm.unapply))
+
+  def sayHello(): Action[AnyContent] = Action.async { implicit request =>
+    helloUserForm.bindFromRequest.fold(
+      badForm => Future {
+        BadRequest(" ")
+      },
       validForm => {
-        println("---------------"+validForm.name)
-        val userName = validForm.name
         for {
-          result <- helloService.hello(userName).invoke()
+          result <- helloService.hello(validForm.name).invoke()
         }
           yield {
-            Ok("-----------hello!!!------"+result)
+            Ok(result)
           }
       }
     )
+  }
 
-
-
+  def changeMessage(): Action[AnyContent] = Action.async { implicit request =>
+    helloForm.bindFromRequest.fold(
+      badForm => Future {
+        BadRequest(" ")
+      },
+      validForm => {
+        for{
+          result <- helloService.useGreeting(validForm.name).invoke(GreetingMessage(validForm.message))
+        }
+          yield{
+            Ok("Message successfully changed !!")
+          }
+      }
+    )
   }
 }
+
 
