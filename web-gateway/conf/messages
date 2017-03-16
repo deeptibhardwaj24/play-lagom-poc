@@ -1,3 +1,4 @@
-formErrors=There are some errors in your form.
 name=Enter your name here
 message=Enter the new message
+formErrors=The given form is erroneous
+error=please be careful

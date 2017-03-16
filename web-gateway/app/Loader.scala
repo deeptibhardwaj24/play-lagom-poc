@@ -14,7 +14,9 @@ import play.api._
 import sample.helloworld.api.HelloService
 import play.api.Play.current
 import play.api.i18n.Messages.Implicits._
+import sample.helloworldconsumer.api.HelloConsumerService
 import router.Routes
+
 import scala.collection.immutable
 import scala.concurrent.ExecutionContext
 
@@ -37,6 +39,7 @@ abstract class WebGateway @Inject()(context: Context) extends BuiltInComponentsF
 
 
   lazy val helloService = serviceClient.implement[HelloService]
+  lazy val helloConsumerService = serviceClient.implement[HelloConsumerService]
   lazy val main = wire[Main]
   lazy val helloController = wire[HelloController]
   lazy val assets = wire[Assets]

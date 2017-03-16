@@ -7,14 +7,15 @@ import play.api.data.Forms._
 import play.api.i18n.{I18nSupport, MessagesApi}
 import play.api.mvc.{Action, AnyContent}
 import sample.helloworld.api.HelloService
+import sample.helloworldconsumer.api.HelloConsumerService
 
 import scala.concurrent.{ExecutionContext, Future}
 
-class Main @Inject()(val messagesApi: MessagesApi, helloService: HelloService)(implicit ec: ExecutionContext)
-  extends AbstractController(messagesApi, helloService) with I18nSupport {
+class Main @Inject()(val messagesApi: MessagesApi, helloService: HelloService, helloConsumerService: HelloConsumerService)(implicit ec: ExecutionContext)
+  extends AbstractController(messagesApi, helloService,helloConsumerService) with I18nSupport {
 
   val helloUserForm = Form(mapping(
-    "name" -> nonEmptyText
+    "name" -> text.verifying(value => value.length > 0)
   )(HelloUserForm.apply)(HelloUserForm.unapply))
 
   val helloForm = Form(mapping(

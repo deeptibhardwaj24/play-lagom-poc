@@ -6,9 +6,7 @@
        id="@id" @if(elements.infos){ aria-describedby="@{id}HelpText" }>
     @if(elements.hasName) {@elements.name} else {@elements.label}
     @elements.input
-    @elements.errors.map { error =><span class="error">@error</span>
-    }
-</label>
+    </label>
 @for(info <- elements.infos) {<p class="help-text" id="@{id}HelpText">@info</p>
 }
 }

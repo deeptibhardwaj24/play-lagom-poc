@@ -1,4 +1,5 @@
 package sample.helloworldconsumer.impl
+
 import java.time.LocalDateTime
 
 import akka.Done
@@ -16,16 +17,15 @@ class MessageEntity extends PersistentEntity {
   override def initialState = MessageState("", LocalDateTime.now().toString)
 
   override def behavior: Behavior = {
-    case MessageState(msg, _) => Actions().onCommand[SaveNewMessage, Done]{
+    case MessageState(msg, _) => Actions().onCommand[SaveNewMessage, Done] {
       case (SaveNewMessage(msg), ctx, state) =>
         println(s"observe new message from kafka and save ${msg}")
-
-        ctx.thenPersist( MessageSaved(msg)) { msgSaved: MessageSaved =>
+        ctx.thenPersist(MessageSaved(msg)) { msgSaved: MessageSaved =>
           ctx.reply(Done)
         }
     }.onEvent {
       case (MessageSaved(message), state) =>
-        println(s"MessgaeSaved event fire ...")
+        println(s"MessageSaved event fire ...")
 
         MessageState(message, LocalDateTime.now().toString)
     }

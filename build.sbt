@@ -88,7 +88,7 @@ lazy val webGateway = (project in file("web-gateway"))
 
     )
     )
-  .dependsOn(`producer-api`)
+  .dependsOn(`producer-api`, `consumer-api`)
 
 def commonSettings: Seq[Setting[_]] = Seq(
 )
@@ -98,7 +98,7 @@ coverageExcludedPackages in `consumer-impl` :=
 
 coverageExcludedPackages in `producer-impl` :=
 """sample.helloworld.impl.HelloLoader""".stripMargin
-// End => scoverage exludes files configuration according to projects
+// End => scoverage excluded files configuration according to projects
 
 /**
   * Uncomment the below lines if want to use external cassandra and kafka

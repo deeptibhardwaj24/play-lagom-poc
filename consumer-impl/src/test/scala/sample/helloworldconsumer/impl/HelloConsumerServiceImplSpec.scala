@@ -40,7 +40,7 @@ class HelloConsumerServiceImplSpec extends AsyncWordSpec with Matchers with Befo
     "publish updates on greetings message" in {
 
       producerStub.send(GreetingMessage("added to kafka!"))
-      client.foo.invoke().map { resp =>
+      client.latestMessage.invoke().map { resp =>
         resp should ===("added to kafka!")
       }
     }
