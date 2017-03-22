@@ -75,7 +75,7 @@ lazy val `consumer-impl` = (project in file("consumer-impl"))
 
 lazy val webGateway = (project in file("web-gateway"))
   .settings(commonSettings: _*)
-  .enablePlugins(PlayScala && LagomPlay)
+  .enablePlugins(PlayScala && LagomPlay )
     .settings(
 
     libraryDependencies ++= Seq(

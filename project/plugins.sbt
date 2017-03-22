@@ -15,3 +15,4 @@ addSbtPlugin("de.johoop" % "cpd4sbt" % "1.2.0")
 addSbtPlugin("net.virtual-void" % "sbt-dependency-graph" % "0.8.2")
 // end code quality plugins
 
+addSbtPlugin("com.lightbend.conductr" % "sbt-conductr" % "2.3.0")
