@@ -53,7 +53,7 @@ lazy val `consumer-api` = (project in file("consumer-api"))
       playJsonDerivedCodecs
     )
   )
-route
+
 lazy val `consumer-impl` = (project in file("consumer-impl"))
   .enablePlugins(LagomScala,CopyPasteDetector)
   .settings(
