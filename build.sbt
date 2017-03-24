@@ -14,7 +14,8 @@ val playJsonDerivedCodecs = "org.julienrf" %% "play-json-derived-codecs" % "3.3"
 
 lazy val `play-lagom` = (project in file("."))
   .aggregate(`producer-api`, `producer-impl`, `consumer-api`,
-    `consumer-impl`)
+    `consumer-impl`, webGateway)
+  .settings(commonSettings : _*)
 
 
 lazy val `producer-api` = (project in file("producer-api"))
@@ -52,7 +53,7 @@ lazy val `consumer-api` = (project in file("consumer-api"))
       playJsonDerivedCodecs
     )
   )
-
+route
 lazy val `consumer-impl` = (project in file("consumer-impl"))
   .enablePlugins(LagomScala,CopyPasteDetector)
   .settings(
